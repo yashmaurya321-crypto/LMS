@@ -1,0 +1,181 @@
+/* General container for the course detail page */
+
+/* Hero Section Styling */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    height: 80vh;
+    background-image: url("../assets/download.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; 
+  }
+  
+  .hero-section::before {
+    content: ""; /* This is needed to create the pseudo-element */
+    position: absolute; /* Position it absolutely inside the container */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.53); /* Black color with 53% transparency */
+    z-index: 1; /* Ensures the overlay is above the background but below the text */
+  }
+  
+  .hero-section .left-hero,
+  .hero-section .right-hero {
+    z-index: 2; /* Ensure the content is above the overlay */
+  }
+  
+  
+  .left-hero {
+    width: 50%;
+    padding: 20px;
+  }
+  
+  .left-hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .enroll-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .right-hero {
+    width: 45%;
+  }
+  
+  .course-description-box {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .course-description-box h4 {
+    margin-bottom: 10px;
+  }
+  
+  .course-description-box p {
+    color: #555;
+  }
+  
+  /* Additional Details Styling */
+  .additional-details {
+    margin-top: 40px;
+  }
+  
+  .additional-details h5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .additional-details ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .additional-details li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .detail-icon {
+    margin-right: 10px;
+    color: #007bff;
+    font-size: 20px;
+  }
+  
+  /* Info Section Styling */
+  .info-section {
+    margin-top: 40px;
+  }
+  
+  .buttons-container {
+    display: flex;
+    margin-left: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .info-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px;
+  }
+  
+  /* Active Button Styling */
+  .info-btn.active {
+    background-color: #0056b3; /* Darker blue for active state */
+  }
+  
+  /* About Section */
+  .about-section,
+  .modules-section {
+    margin: 20px;
+  }
+  
+  .about-section h5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .about-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .modules-section h5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Ensure Bootstrap accordion works properly */
+  .accordion-button {
+    font-size: 16px;
+  }
+  
+  .accordion-body {
+    padding: 20px;
+  }
+  .who-is-for-section {
+    
+    padding: 20px;
+    border-radius: 8px;
+   
+    margin-top: 20px;
+  }
+  
+  .who-is-for-section h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .who-is-for-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .who-is-for-section li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  
+  .who-is-for-section li::marker {
+    color: #007bff; /* Change the color of the list item marker */
+  }

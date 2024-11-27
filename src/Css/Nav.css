@@ -1,0 +1,50 @@
+/* Optional: Styling for the navbar items */
+.navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #0056b3;
+    font-style: unset;
+  }
+  
+  /* Transition for background color and box-shadow */
+  .navbar {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Background color when scrolled */
+  .bg-scrolled {
+    background-color: #fff !important; /* Set the background to white when scrolled */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
+  }
+  
+  /* Transparent background when at the top */
+  .bg-transparent {
+    background-color: transparent !important;
+  }
+  
+  /* Ensure the nav item covering the height */
+  .navbar-nav .nav-item.login-item {
+    height: 100%;
+    display: flex;
+    align-items: center; /* Center the login button vertically */
+    background-color: #5386C0; /* Background color of the button */
+  }
+  
+  /* Optional: Style the login link */
+  .navbar-nav .nav-item.login-item .nav-link {
+    color: white; /* White text color */
+    padding: 10px 20px; /* Adjust padding for the button */
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Darker background color for login button on hover */
+  .navbar-nav .nav-item.login-item .nav-link:hover {
+    background-color: #3a6fa7;
+    color: #ffffff; /* Keep text white on hover */
+  }
+  

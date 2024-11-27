@@ -1,0 +1,138 @@
+/* Import the Google Font if not already included */
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Inder&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Jomhuria&display=swap');
+
+.course-container {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+
+.sidebar {
+  width: 100%;
+  max-width: 250px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.filter-section {
+  margin-bottom: 25px;
+}
+
+.filter-section h3 {
+  font-size: 20px;
+  color: #1f2937;
+  margin-bottom: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+.filter-section label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #374151;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+  line-height: 1.5;
+  transition: color 0.2s;
+}
+
+.filter-section label:hover {
+  color: #1d4ed8; /* Change text color on hover */
+}
+
+.filter-section input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.filter-section input[type="checkbox"] + span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #f3f4f6;
+  border: 2px solid #9ca3af;
+  border-radius: 4px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.filter-section input[type="checkbox"]:checked + span {
+  background-color: #3b82f6; /* Blue background when checked */
+  border-color: #3b82f6;
+}
+
+.filter-section input[type="checkbox"]:checked + span::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Custom checkbox styles */
+.filter-section input[type="checkbox"] + span::after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.filter-section input[type="checkbox"]:checked + span::after {
+  display: block;
+}
+
+/* Add a custom styled checkbox */
+.filter-section label > span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    max-width: 100%;
+    box-shadow: none;
+    padding: 15px;
+  }
+
+  .filter-section h3 {
+    font-size: 18px;
+  }
+
+  .filter-section label {
+    font-size: 14px;
+  }
+}
+.course-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .course-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}

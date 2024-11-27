@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Inder&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Jomhuria&display=swap');
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #8cc9f7; /* light blue background */
+    padding: 40px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.footer h2, .footer h3 {
+    font-size: 24px;
+    color: #000;
+    font-family: 'Inder Serif', serif;
+}
+
+.footer p {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 24px;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.instagram { background-color: #c13584; }
+.facebook { background-color: #3b5998; }
+.twitter { background-color: #1da1f2; }
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+    background-color: #8cc9f7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .footer-section {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .footer h2, .footer h3 {
+        font-size: 20px;
+    }
+
+    .footer p {
+        font-size: 14px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 15px;
+    }
+
+    .footer h2, .footer h3 {
+        font-size: 18px;
+    }
+
+    .footer p, .footer-section ul li {
+        font-size: 12px;
+    }
+
+    .icon {
+        font-size: 20px;
+        padding: 6px;
+    }
+}

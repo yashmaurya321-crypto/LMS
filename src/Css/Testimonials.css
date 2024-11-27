@@ -1,0 +1,229 @@
+/* Main container styling */
+.container {
+  display: flex;
+  min-height: 100vh; /* Ensure the container takes up the full height */
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden; /* Hide horizontal overflow */
+}
+
+/* Left side styling */
+.left-side {
+  width: 50%;
+  height: 100vh;
+  background-color: #E6E6E6; /* Gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 300px;
+  overflow-y: auto;
+  position: relative; /* To position inner elements relative to the container */
+}
+
+/* The 'Testimonial' and 'Our student says!' text styling */
+.left-side > div {
+  position: absolute;
+  top: 20px; /* Add some space from the top */
+  left: 50%;
+  transform: translateX(-50%); /* Centers the text horizontally */
+  color: #333; /* Dark color for better visibility */
+}
+
+/* Style for the 'Testimonial' text */
+.left-side > div p {
+  font-size: 18px;
+  color: #00aaff; /* Aqua color for the text */
+  margin-bottom: 10px;
+}
+
+/* Style for the 'Our student says!' heading */
+.left-side > div h4 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #333; /* Dark color for readability */
+  margin-top: 0;
+}
+
+/* Hide the scrollbar for the left side */
+.left-side {
+  -ms-overflow-style: none;  /* Hide scrollbar in IE/Edge */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Right side styling */
+.right-side {
+  width: 50%;
+  height: 100vh;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFaqYcM3WaEbDsPUi8o0MMdcg2Tcx1lJW4xoqYQrdRuDxglHcBT7XEbT8rI0XBFMrhRo&usqp=CAU');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* Ensures it doesn't get too small on mobile screens */
+  overflow-y: auto; /* Allows scrolling inside this section if content overflows */
+}
+
+/* Hide the scrollbar for the right side */
+.right-side::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome/Safari */
+}
+
+.right-side {
+  -ms-overflow-style: none;  /* Hide scrollbar in IE/Edge */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Styling for review cards container */
+.reviews-container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  bottom: 10%;
+  left: 5%;
+  overflow-x: auto;
+  padding-bottom: 20px; /* For spacing from bottom */
+  scroll-behavior: smooth;
+  flex-wrap: nowrap; /* Ensures the cards stay in a row, even when scrolling */
+}
+
+/* Review Card styling */
+.reviews-container > div {
+  margin-right: 20px;
+  flex-shrink: 0; /* Prevents shrinking of the review card */
+  width: 100%; /* Full width on smaller screens */
+  max-width: 300px; /* Limit max width of cards for better readability */
+  transition: transform 0.3s ease-in-out; /* Smooth transformation */
+}
+
+/* Optional: Make the layout responsive */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .left-side, .right-side {
+    width: 100%;
+    height: auto; /* Adjust height automatically based on content */
+    min-height: 250px; /* Ensures sections are not too small */
+  }
+
+  .reviews-container {
+    width: 90%; /* Reduce width to fit better on medium screens */
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Space between reviews and bottom */
+    left: 5%; /* Add margin from the left */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-y: auto; /* Allows vertical scrolling */
+  }
+
+  .reviews-container > div {
+    margin-bottom: 20px; /* Add margin between review cards */
+  }
+}
+
+/* Extra responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; /* Adds some padding for smaller screens */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+
+  .left-side, .right-side {
+    width: 100%;
+    height: auto;
+    min-height: 200px; /* Ensure it doesn't shrink too much */
+  }
+
+  /* Hide the right-side section on mobile view */
+  .right-side {
+    display: none; /* This hides the right side */
+  }
+
+  .reviews-container {
+    width: 100%; /* Full width */
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    left: 0; /* Center content */
+    margin-bottom: 15px; /* Spacing between reviews */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
+  .reviews-container > div {
+    width: 90%; /* Full width for cards */
+    margin-bottom: 15px; /* Smaller space between cards */
+  }
+}
+
+/* Very small screens (below 480px) */
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px; /* Reduces padding */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+
+  .left-side, .right-side {
+    width: 100%;
+    height: auto;
+    min-height: 150px; /* Prevents shrinking too much */
+  }
+
+  /* Hide the right-side section on very small screens */
+  .right-side {
+    display: none; /* This hides the right side */
+  }
+
+  .reviews-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px; /* Smaller bottom margin */
+    left: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
+  .reviews-container > div {
+    width: 100%; /* Full width for review cards */
+    margin-bottom: 10px; /* Smaller margin */
+  }
+}
+
+/* Adding some hover effect for review cards (optional) */
+.reviews-container > div:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Adding more card style for better visibility */
+.reviews-container > div {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect on cards for interactive feel */
+.reviews-container > div:hover {
+  transform: translateY(-5px); /* Card lifts on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  color: aqua;
+}

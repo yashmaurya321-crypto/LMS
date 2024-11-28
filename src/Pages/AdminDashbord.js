@@ -23,11 +23,12 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointEleme
 
 function AdminDashbord() {
   const [activeTab, setActiveTab] = useState('courses');
-  const [startDate, setStartDate] = useState('2024-01-01');
-  const [endDate, setEndDate] = useState('2024-12-31');
+const [users, setUsers] = useState( [
+  { "_id": "1", "name": "John Doe", "email": "john@example.com", "role": "student" },
+  { "_id": "2", "name": "Jane Smith", "email": "jane@example.com", "role": "admin" }
+]);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  // State for the course creation form
   const [courseTitle, setCourseTitle] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
   const [coursePrice, setCoursePrice] = useState('');
@@ -64,6 +65,22 @@ function AdminDashbord() {
       navigate('/login'); 
     }
   }, [navigate]);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await customaxios.get('/api/user');
+        console.log("From response of users:", response.data);
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []); // Empty dependency array means this effect will only run once (on component mount)
+
+
+
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => {
     setShowModal(false);
@@ -125,108 +142,70 @@ useEffect(() => {
   const handleSaveCourse = async () => {
     try {
       const formData = new FormData();
-      formData.append('title', courseTitle);
-      formData.append('description', courseDescription);
-      formData.append('price', parseFloat(coursePrice));
-      formData.append('category', courseCategory);
-      formData.append('level', courseLevel);
-      formData.append('sections', JSON.stringify(models)); // Ensure this matches backend expectation
-      formData.append('instructor', 'Yash');
+      formData.append('title', courseTitle); // Course title
+      formData.append('description', courseDescription); // Course description
+      formData.append('price', parseFloat(coursePrice)); // Price, ensuring it's a number
+      formData.append('category', courseCategory); // Category
+      formData.append('level', courseLevel); // Level (e.g., beginner, intermediate, advanced)
+      formData.append('sections', JSON.stringify(models)); // Ensure sections data is in correct format (array of objects)
+      formData.append('instructor', 'Yash'); // Instructor name (could be dynamic)
       
-      // Append arrays as JSON strings
-      formData.append('whoIsThisCourseFor', JSON.stringify(whoIsThisCourseFor));
-      formData.append('skills', JSON.stringify(skills));
-      formData.append('whatYouWillLearn', JSON.stringify(whatYouWillLearn));
-      
+      // Append optional fields as JSON strings
+      formData.append('whoIsThisCourseFor', JSON.stringify(whoIsThisCourseFor)); // Target audience
+      formData.append('skills', JSON.stringify(skills)); // Skills
+      formData.append('whatYouWillLearn', JSON.stringify(whatYouWillLearn)); // What will the course teach?
+  
+      // Handle image if provided
       if (image) {
-        formData.append('image', image);
+        formData.append('image', image); // Image file
       }
   
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+        
+      
+      }
+  
+      // Send the FormData to the backend API
       const response = await customaxios.post('/api/course/courses', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data', // Ensure proper content type for file upload
         },
       });
   
+      // If the course is created successfully, handle the response
       if (response.status === 201) {
         console.log('Course created successfully:', response.data);
-        handleCloseModal();
+        handleCloseModal(); // Close the modal if successful
         getCourses(); // Refresh the course list
       }
     } catch (error) {
+      // Catch any error and log a message
       console.error('Failed to create course:', error.response?.data || error.message);
     }
   };
   
-  const chartData = {
-    labels: courses.map(course => course.title),
-    datasets: [
-      {
-        label: 'Number of Purchases',
-        data: courses.map(course => course.purchases),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Courses Purchase Analytics',
-      },
-    },
-  };
+  
 
   // Data for the Sales Over Time Line Chart
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const salesChartData = {
-    labels: months,
-    datasets: courses.map(course => ({
-      label: course.title,
-      data: course.monthlySales,
-      fill: false,
-      borderColor: '#' + Math.floor(Math.random() * 16777215).toString(16),
-      tension: 0.3,
-    })),
-  };
 
-  const salesChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Sales Over Time',
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Months',
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Sales',
-        },
-      },
-    },
-  };
+  
 
-  return (
+  const handelDeleteCourse =async(id)=>{
+try{
+  
+const res = await customaxios.delete(`/api/course/${id}`)
+if(res.status === 200){
+  setCourses((prevCourses) =>
+    prevCourses.filter((course) => course._id !== id)
+  );
+
+}
+}catch(err){
+    console.log(err);
+}
+}  
+return (
     <div className="dashboard-container">
       {/* Left Panel */}
       <div className="left-panel">
@@ -236,9 +215,9 @@ useEffect(() => {
           <div className="profile-buttons">
             <button
               className={`profile-button ${activeTab === 'Analytics' ? 'active' : ''}`}
-              onClick={() => setActiveTab('Analytics')}
+              onClick={() => setActiveTab('Users')}
             >
-              <FaBook /> Analytics
+              <FaBook /> Users
             </button>
             <button
               className={`profile-button ${activeTab === 'courses' ? 'active' : ''}`}
@@ -267,40 +246,67 @@ useEffect(() => {
               </Button>
             </div>
             <div className="student-courses">
-              {courses.map((course, index) => (
-                <div key={index} className="course-card">
-                  <img src={course.thumbnail} alt={course.title} />
-                  <h4>{course.title}</h4>
-                  <p>{course.description}</p>
-                  <div className="course-details">
-                    <span>Price: {course.price}</span><br/>
-                    <span>Category: {course.category}</span><br/>
-                    <span>Level: {course.level}</span><br/>
-                    <span>Purchases: {course.purchases}</span>
-                  </div>
-                </div>
-              ))}
+            {courses.length > 0 ? (
+        courses.map((course, index) => (
+          <div key={index} className="course-card">
+            <img src={course.thumbnail} alt={course.title} />
+            <h4>{course.title}</h4>
+            <p>{course.description}</p>
+            <div className="course-details">
+              <span>Price: {course.price}</span>
+              <br />
+              <span>Category: {course.category}</span>
+              <br />
+              <span>Level: {course.level}</span>
+              <br />
+              <span>Purchases: {course.purchases}</span>
             </div>
+            <button
+              className="delete-button"
+              onClick={() => handelDeleteCourse(course._id)}
+            >
+              Delete
+            </button>
           </div>
-        ) : activeTab === 'Analytics' ? (
-          <div className="analytics-section">
-            <h2 className="section-title">Courses Analytics</h2>
-            
-            {/* Bar Chart for Purchases */}
-            <Bar data={chartData} options={chartOptions} />
-
-            {/* Time Range Selector */}
-            <div className="time-range-selector">
-              <label>Start Date: </label>
-              <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-              <label>End Date: </label>
-              <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+        ))
+      ) : (
+        <p className="no-courses-message" style = {{color : "black"}}>No courses available. Start adding some!</p>
+      )}
+    </div>
             </div>
-
-            {/* Line Chart for Sales Over Time */}
-            <h2 className="section-title">Sales Over Time</h2>
-            <Line data={salesChartData} options={salesChartOptions} />
-          </div>
+   
+        ) : activeTab === 'Users' ? (
+          <div>
+          <h2 className="mb-4">Users List</h2>
+          <table className="table table-bordered table-striped">
+            <thead className="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.length > 0 ? (
+                users.map((user, index) => (
+                  <tr key={user.id}>
+                    <td>{index + 1}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="text-center">
+                    No users found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
         ) : (
           <div className="settings-section">
             <h2 className="section-title">Settings</h2>
@@ -369,8 +375,9 @@ useEffect(() => {
         }}
         placeholder="Enter target audience"
       />
-      <button 
-        className="btn btn-danger" 
+      <button
+        type="button"
+        className="btn btn-danger"
         onClick={() => {
           const newItems = whoIsThisCourseFor.filter((_, i) => i !== index);
           setWhoIsThisCourseFor(newItems);
@@ -380,83 +387,86 @@ useEffect(() => {
       </button>
     </div>
   ))}
-  <Button 
-    variant="secondary" 
+  <button
+    type="button"
+    className="btn btn-primary"
     onClick={() => setWhoIsThisCourseFor([...whoIsThisCourseFor, ''])}
   >
-    Add More
-  </Button>
+    Add Target Audience
+  </button>
 </div>
 
 <div className="form-group">
-        <label>Skills Required</label>
-        {skills.map((item, index) => (
-          <div key={index} className="input-group mb-2">
-            <input
-              type="text"
-              className="form-control"
-              value={item}
-              onChange={(e) => {
-                const newItems = [...skills];
-                newItems[index] = e.target.value;
-                setSkills(newItems);
-              }}
-              placeholder="Enter skill"
-            />
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                const newItems = skills.filter((_, i) => i !== index);
-                setSkills(newItems);
-              }}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-        <Button
-          variant="secondary"
-          onClick={() => setSkills([...skills, ''])}
-        >
-          Add More
-        </Button>
-      </div>
+  <label>Skills</label>
+  {skills.map((item, index) => (
+    <div key={index} className="input-group mb-2">
+      <input
+        type="text"
+        className="form-control"
+        value={item}
+        onChange={(e) => {
+          const newItems = [...skills];
+          newItems[index] = e.target.value;
+          setSkills(newItems);
+        }}
+        placeholder="Enter skill"
+      />
+      <button
+        type="button"
+        className="btn btn-danger"
+        onClick={() => {
+          const newItems = skills.filter((_, i) => i !== index);
+          setSkills(newItems);
+        }}
+      >
+        Remove
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    className="btn btn-primary"
+    onClick={() => setSkills([...skills, ''])}
+  >
+    Add Skill
+  </button>
+</div>
 
-      {/* What You Will Learn Input Section */}
-      <div className="form-group">
-        <label>What You Will Learn</label>
-        {whatYouWillLearn.map((item, index) => (
-          <div key={index} className="input-group mb-2">
-            <input
-              type="text"
-              className="form-control"
-              value={item}
-              onChange={(e) => {
-                const newItems = [...whatYouWillLearn];
-                newItems[index] = e.target.value;
-                setWhatYouWillLearn(newItems);
-              }}
-              placeholder="Enter learning objective"
-            />
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                const newItems = whatYouWillLearn.filter((_, i) => i !== index);
-                setWhatYouWillLearn(newItems);
-              }}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-        <Button
-          variant="secondary"
-          onClick={() => setWhatYouWillLearn([...whatYouWillLearn, ''])}
-        >
-          Add More
-        </Button>
-      </div>
-
+<div className="form-group">
+  <label>What You Will Learn</label>
+  {whatYouWillLearn.map((item, index) => (
+    <div key={index} className="input-group mb-2">
+      <input
+        type="text"
+        className="form-control"
+        value={item}
+        onChange={(e) => {
+          const newItems = [...whatYouWillLearn];
+          newItems[index] = e.target.value;
+          setWhatYouWillLearn(newItems);
+        }}
+        placeholder="Enter what you will learn"
+      />
+      <button
+        type="button"
+        className="btn btn-danger"
+        onClick={() => {
+          const newItems = whatYouWillLearn.filter((_, i) => i !== index);
+          setWhatYouWillLearn(newItems);
+        }}
+      >
+        Remove
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    className="btn btn-primary"
+    onClick={() => setWhatYouWillLearn([...whatYouWillLearn, ''])}
+  >
+    Add Learning Outcome
+  </button>
+</div>
             <div className="form-group">
               <label>Price</label>
               <input

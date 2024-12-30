@@ -1,40 +1,35 @@
 import React from 'react';
-import { FaInstagram, FaFacebookF, FaTwitter } from 'react-icons/fa';
-import { MdLocationOn, MdEmail, MdPhone } from 'react-icons/md';
-import '../Css/Footer.css'; 
+import '../Css/Footer.css'; // Import the CSS for styling
+import { FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-section">
-        <h2>Edtech</h2>
-        <p>
-          Far far away, behind the word mountains, far from the countries Vokalia
-          and Consonantia, there live the blind texts.
-        </p>
-        <div className="social-icons">
-          <a href="#"><FaInstagram className="icon instagram" /></a>
-          <a href="#"><FaFacebookF className="icon facebook" /></a>
-          <a href="#"><FaTwitter className="icon twitter" /></a>
+      <div className="footer-container">
+        <div className="footer-section company-info">
+          <h2>Geneus Solutions</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <div className="social-icons">
+            <FaInstagram className="social-icon instagram" />
+            <FaWhatsapp className="social-icon whatsapp" />
+          </div>
         </div>
-      </div>
-
-      <div className="footer-section">
-        <h3>Quick link</h3>
-        <ul>
-          <li>➤ About</li>
-          <li>➤ Contact</li>
-          <li>➤ Course</li>
-        </ul>
-      </div>
-
-      <div className="footer-section">
-        <h3>Have a Questions?</h3>
-        <ul className="contact-info">
-          <li><MdLocationOn /> 203 Fake St. Mountain View, San Francisco, California, USA</li>
-          <li><MdEmail /> example@gmail.com</li>
-          <li><MdPhone /> 5723986498234</li>
-        </ul>
+        <div className="footer-section quick-links">
+          <h3 style={{color : 'white'}}>Quick Link</h3>
+          <ul>
+            <li><a style = {{color : 'white'}}href="#about">About</a></li>
+            <li><a style = {{color : 'white'}} href="#courses">Courses</a></li>
+            <li><a style = {{color : 'white'}} href="#nutri-app">Nutri App</a></li>
+          </ul>
+        </div>
+        <div className="footer-section contact-info">
+          <h3 style={{color : 'white'}}>Contact us</h3>
+          <ul>
+            <li><FaMapMarkerAlt /> 123 Street, New York, USA</li>
+            <li><FaEnvelope /> xyz@gmail.com</li>
+            <li><FaPhoneAlt /> +1234567890</li>
+          </ul>
+        </div>
       </div>
     </footer>
   );

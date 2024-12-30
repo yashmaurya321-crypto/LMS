@@ -1,89 +1,129 @@
 import React from 'react';
-import '../Css/Contact.css'
-import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'; // Import the icons from React Icons
 import img1 from '../assets/banner.jpeg';
+import '../Css/Contact.css';
+
 function Contact() {
   return (
-    <div>
-         <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "70vh",
-          backgroundImage: `url(${img1})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          position: "relative"
-        }}
-      >
-
+    <div className='contact-banner' style={{ position: 'relative' }}>
+       <div style={{ position: 'relative', width: '100vw', height: '60vh' }}>
+        <img
+          src={img1}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          alt="Contact Banner"
+        />
+        {/* Overlay now only covers the image */}
         <div
           style={{
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(147, 197, 255, 0.53)" // #93C5FF color with 53% opacity
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(124, 166, 255, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-        ></div>
-
-      
-        <div style={{ position: "relative", color: "#fff", textAlign: "center", zIndex: 1 }}>
-          <h1>Conatct Us</h1>
-          <h3>Home / Contact us</h3>
+        >
+          <h1 style={{ color: 'white', fontSize: '3rem' }}>Contact Us</h1>
         </div>
       </div>
-      <div className="contact-container">
-      {/* Left Section - Contact Information */}
-      <div className="contact-info">
-        <h2>Lets get in touch</h2>
-        <p style = {{color: 'white'}}>We're open for any suggestion or just to have a chat</p>
-        <div className="contact-details">
-          <div className="contact-item">
-            <FaMapMarkerAlt className="contact-icon" />
-            <p style = {{color: 'white'}}>203 Fake St. Mountain View, San Francisco, California, USA</p>
-          </div>
-          <div className="contact-item">
-            <FaEnvelope className="contact-icon" />
-            <p style = {{color: 'white'}}>example@gmail.com</p>
-          </div>
-          <div className="contact-item">
-            <FaPhoneAlt className="contact-icon" />
-            <p style = {{color: 'white'}}>5723986498234</p>
+      <div className='contact-form' style={{ display: 'flex', padding: '2rem' }}>
+        {/* Left Section */}
+        <div
+          style={{
+            backgroundColor: '#007BFF', // Blue color for the sidebar
+            color: 'white',
+            padding: '2rem',
+            width: '35%',
+            borderRadius: '8px 0 0 8px',
+          }}
+        >
+          <h2 style = {{color : 'white'}}>Let's get in touch</h2>
+          <p style={{ margin: '1rem 0', color : 'white' }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <div style={{ marginBottom: '1rem', color : 'white' }}>
+            <p style={{ color : 'white' }}>
+              <FaMapMarkerAlt style={{ marginRight: '8px' }} /> 123 Street, New York, USA
+            </p>
+            <p style={{ color : 'white' }}>
+              <FaEnvelope style={{ marginRight: '8px' }} /> xyz@gmail.com
+            </p>
+            <p style={{ color : 'white' }}>
+              <FaPhoneAlt style={{ marginRight: '8px' }} /> +1234567890
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Right Section - Contact Form */}
-      <div className="contact-form">
-        <h2>Get in Touch</h2>
-        <form>
-          <div className="form-group">
-            <div className="form-field">
-              <label>Full name</label>
-              <input type="text" placeholder="Name" />
+        {/* Right Section */}
+        <div
+          style={{
+            backgroundColor: '#f9f9f9',
+            padding: '2rem',
+            width: '65%',
+            borderRadius: '0 8px 8px 0',
+          }}
+        >
+          <form>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ color: '#007BFF' }}>Full Name</label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  style={{ width: '100%', padding: '0.5rem', marginTop: '0.5rem' }}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={{ color: '#007BFF' }}>Email</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  style={{ width: '100%', padding: '0.5rem', marginTop: '0.5rem' }}
+                />
+              </div>
             </div>
-            <div className="form-field">
-              <label>Email</label>
-              <input type="email" placeholder="Email" />
+
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ color: '#007BFF' }}>Subject</label>
+              <input
+                type="text"
+                placeholder="Subject"
+                style={{ width: '100%', padding: '0.5rem', marginTop: '0.5rem' }}
+              />
             </div>
-          </div>
-          <div className="form-group">
-            <label>Subject</label>
-            <input type="text" placeholder="Subject" />
-          </div>
-          <div className="form-group">
-            <label>Message</label>
-            <textarea placeholder="Message"></textarea>
-          </div>
-        </form>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ color: '#007BFF' }}>Message</label>
+              <textarea
+                placeholder="Message"
+                style={{ width: '100%', padding: '0.5rem', marginTop: '0.5rem', height: '100px' }}
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              style={{
+                backgroundColor: '#007BFF',
+                color: 'white',
+                padding: '0.5rem 2rem',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              Send
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-    </div>
-   
   );
 }
 

@@ -40,7 +40,6 @@ function Login() {
     }
   };
 
-  // Function to hide the toast after a few seconds
   const handleToastClose = () => setShowToast(false);
 
   return (

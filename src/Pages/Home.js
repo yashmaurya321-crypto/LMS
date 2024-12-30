@@ -5,7 +5,7 @@ import Hero from '../Component/Hero';
 import Popular from '../Component/Popular';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-
+import Crousal from '../Component/Crousal'
 function Home() {
   const user = useSelector((state) => state.user.userInfo);
 
@@ -16,7 +16,6 @@ function Home() {
         console.log("User data is not available");
     }
 
-    // Check cookie
     const authToken = Cookies.get('auth_token');
     if (authToken) {
         console.log(authToken);
@@ -27,7 +26,8 @@ function Home() {
 
   return (
     <div>
-      <Hero />
+      
+      <Crousal />
       <HeroAbout />
       <Popular />
       <Testimonials />

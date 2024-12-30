@@ -186,8 +186,20 @@ useEffect(() => {
   };
   
   
-
-  // Data for the Sales Over Time Line Chart
+const handleLogut = async () => {
+  try{
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    
+   
+    window.location.reload();
+  
+  
+    window.location.href = '/';
+  }catch(err){
+    console.log(err)
+  }
+}
 
   
 
@@ -315,8 +327,8 @@ return (
               <FaEdit />
             </div>
             <div className="setting-option">
-              <h6>Delete account</h6>
-              <FaTrashAlt />
+              <h6>Logut</h6>
+              <FaTrashAlt  onClick={()=> handleLogut()}/>
             </div>
           </div>
         )}

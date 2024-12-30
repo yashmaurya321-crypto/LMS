@@ -1,108 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Inder&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Jomhuria&display=swap');
-
+/* Footer container and layout */
 .footer {
-    display: flex;
-    justify-content: space-around;
-    background-color: #8cc9f7; /* light blue background */
-    padding: 40px;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    flex-wrap: wrap;
-}
-
-.footer-section {
-    max-width: 300px;
-    margin-bottom: 20px;
-}
-
-.footer h2, .footer h3 {
-    font-size: 24px;
-    color: #000;
-    font-family: 'Inder Serif', serif;
-}
-
-.footer p {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.social-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.icon {
-    font-size: 24px;
-    color: white;
-    padding: 8px;
-    border-radius: 50%;
-    background-color: #000;
-}
-
-.instagram { background-color: #c13584; }
-.facebook { background-color: #3b5998; }
-.twitter { background-color: #1da1f2; }
-
-.footer-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-    color: #000000;
-}
-
-.contact-info li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #333;
-    background-color: #8cc9f7;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .footer-section {
-        max-width: 100%;
-        margin-bottom: 30px;
-    }
-
-    .footer h2, .footer h3 {
-        font-size: 20px;
-    }
-
-    .footer p {
-        font-size: 14px;
-    }
-
-    .social-icons {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer {
-        padding: 15px;
-    }
-
-    .footer h2, .footer h3 {
-        font-size: 18px;
-    }
-
-    .footer p, .footer-section ul li {
-        font-size: 12px;
-    }
-
-    .icon {
-        font-size: 20px;
-        padding: 6px;
-    }
-}
+    background: linear-gradient(to bottom, #a0c9ff, #007bff); /* Gradient background */
+    color: #fff; /* Text color */
+    padding: 40px 0; /* Top and bottom padding */
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Centering content */
+    align-items: center; /* Vertically centering */
+    font-family: Arial, sans-serif; /* Font family */
+  }
+  
+  /* Container that holds all footer sections */
+  .footer-container {
+    width: 80%; /* Width of the footer content */
+    display: flex; /* Flexbox layout for footer sections */
+    justify-content: space-between; /* Space between sections */
+  }
+  
+  /* Styling for each section within the footer */
+  .footer-section {
+    flex: 1; /* Each section takes equal space */
+    margin: 0 15px; /* Horizontal margin between sections */
+  }
+  
+  /* Styling for the company info section */
+  .company-info h2 {
+    font-size: 24px; /* Heading size */
+    margin-bottom: 15px; /* Bottom margin */
+  }
+  
+  .company-info p {
+    font-size: 14px; /* Paragraph font size */
+    line-height: 1.6; /* Line height for readability */
+    margin-bottom: 20px; /* Bottom margin */
+  }
+  
+  /* Styling for the social media icons */
+  .social-icons {
+    display: flex; /* Flexbox for icons */
+    gap: 10px; /* Space between icons */
+  }
+  
+  .social-icon {
+    font-size: 24px; /* Icon size */
+    cursor: pointer; /* Pointer on hover */
+    transition: transform 0.3s; /* Smooth transform transition */
+  }
+  
+  .social-icon:hover {
+    transform: scale(1.1); /* Icon grows on hover */
+  }
+  
+  /* Individual icon colors */
+  .instagram {
+    color: #e4405f; /* Instagram color */
+  }
+  
+  .whatsapp {
+    color: #25d366; /* WhatsApp color */
+  }
+  
+  /* Styling for quick links section */
+  .quick-links h3,
+  .contact-info h3 {
+    font-size: 18px; /* Heading size */
+    margin-bottom: 15px; /* Bottom margin */
+  }
+  
+  /* Remove list style for quick links and contact info lists */
+  .quick-links ul,
+  .contact-info ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+  }
+  
+  /* Styling for each list item in quick links and contact info */
+  .quick-links li,
+  .contact-info li {
+    margin-bottom: 10px; /* Margin between list items */
+    font-size: 14px; /* Font size */
+  }
+  
+  /* Styling for links in quick links */
+  .quick-links a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition */
+  }
+  
+  .quick-links a:hover {
+    color: #e0e0e0; /* Hover color */
+  }
+  
+  /* Styling for contact info list items */
+  .contact-info li {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Align items vertically */
+  }
+  
+  /* Styling for icons in the contact info section */
+  .contact-info li svg {
+    margin-right: 8px; /* Space between icon and text */
+  }
+  
+  /* Remove background color from contact-info section */
+  .contact-info {
+    background: none !important; /* Ensure no background color is applied */
+  }
+  

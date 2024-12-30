@@ -77,7 +77,7 @@ const [courses, setCourses] = useState([]);
   
     <div style={{ position: "relative", color: "#fff", textAlign: "center", zIndex: 1 }}>
       <h1>Courses</h1>
-      <h3>Home / Course</h3>
+      <h3 style = {{color : 'white'}}>Home / Course</h3>
     </div>
     </div>
     <div className="course-container">

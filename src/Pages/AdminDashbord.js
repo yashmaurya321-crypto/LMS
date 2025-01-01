@@ -68,7 +68,7 @@ const [users, setUsers] = useState( [
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await customaxios.get('/api/user');
+        const response = await customaxios.get('/api/user//users');
         console.log("From response of users:", response.data);
         setUsers(response.data);
       } catch (error) {
@@ -77,7 +77,7 @@ const [users, setUsers] = useState( [
     };
 
     fetchUsers();
-  }, []); // Empty dependency array means this effect will only run once (on component mount)
+  }, []); 
 
 
 
@@ -92,6 +92,7 @@ try{
 const res = await customaxios.get('/api/course/courses')
 if(res.status===200){
 setCourses(res.data.courses)
+
 }
 }catch(error){
 console.log(error)

@@ -9,11 +9,34 @@ function CourseDetail({ courseId }) {
   const userInfo = useSelector((state) => state.user.userInfo); 
   const location = useLocation();
 
+  const fetchNumOfStudents = async () => {
+    console.log("called")
+    try {
+      console.log("course id ",courseData._id)
+      const res = await customaxios.get(`/api/course/students/${courseData._id}`);
+      
+      if (res.status === 200) {
+        console.log("Number of students:", res.data.numOfStudents);
+        setCourseData(prev => ({
+          ...prev,
+          numOfStudents: res.data.numOfStudents, 
+        }));
+        console.log("After setting course ", courseData)
+      } else {
+        console.log("Unexpected response status:", res.status);
+      }
+    } catch (error) {
+      console.error("Error fetching number of students:", error.message || error);
+    }
+  };
+  
   useEffect(() => {
-    // Get course data from location state when the component mounts
+   
     const { course } = location.state || {}; 
+    
     if (course) {
       setCourseData(course);
+      fetchNumOfStudents();
     }else{
       window.location.href = '/course';
     }
@@ -204,7 +227,7 @@ window.location.href = '/login';
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
             transition: 'transform 0.3s ease',
           }}>
-            <b>Students Enrolled</b>: {courseData.totalStudents}
+            <b>Students Enrolled</b>: {courseData.numOfStudents}
           </li>
         </ul>
       </div>
@@ -275,30 +298,45 @@ window.location.href = '/login';
           </div>
         )}
 
-        {activeTab === 'modules' && (
-          <div>
-            <h3 style={{ marginBottom: '15px', fontSize: '1.5rem', color: '#333' }}>Modules</h3>
-            {courseData.sections.map((section, index) => (
-              <div key={index} style={{
-                marginBottom: '20px',
-                border: '1px solid #e0e0e0',
-                borderRadius: '8px',
-                padding: '15px',
-                backgroundColor: '#f8f8f8',
-                transition: 'transform 0.3s ease',
-              }}>
-                <h4 style={{ marginBottom: '10px', color: '#555', cursor: 'pointer' }}>{section.title}</h4>
-                <ul style={{ listStyleType: 'none', paddingLeft: '10px' }}>
-                  {section.lessons.map((lesson, lessonIndex) => (
-                    <li key={lessonIndex} style={{ marginBottom: '10px' }}>
-                      {lesson.title} 
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+{activeTab === 'modules' && (
+  <div>
+    <h3 style={{ marginBottom: '15px', fontSize: '1.5rem', color: '#333' }}>Modules</h3>
+    <div className="accordion" id="accordionExample">
+      {courseData.sections.map((section, index) => (
+        <div className="accordion-item" key={index}>
+          <h2 className="accordion-header" id={`heading-${index}`}>
+            <button
+              className={`accordion-button ${index === 0 ? '' : 'collapsed'}`}
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target={`#collapse-${index}`}
+              aria-expanded={index === 0 ? 'true' : 'false'}
+              aria-controls={`collapse-${index}`}
+            >
+              {section.title}
+            </button>
+          </h2>
+          <div
+            id={`collapse-${index}`}
+            className={`accordion-collapse collapse ${index === 0 ? 'show' : ''}`}
+            aria-labelledby={`heading-${index}`}
+            data-bs-parent="#accordionExample"
+          >
+            <div className="accordion-body">
+              <ul style={{ listStyleType: 'none', paddingLeft: '10px' }}>
+                {section.lessons.map((lesson, lessonIndex) => (
+                  <li key={lessonIndex} style={{ marginBottom: '10px' }}>
+                   {lessonIndex + 1}. {lesson.title}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        )}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
       </div>
 
       {/* Who is This Course For Section */}

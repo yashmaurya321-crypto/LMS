@@ -9,19 +9,14 @@ function CourseDetail({ courseId }) {
   const userInfo = useSelector((state) => state.user.userInfo); 
   const location = useLocation();
 
-  const fetchNumOfStudents = async () => {
-    console.log("called")
+  const fetchNumOfStudents = async (id) => {
     try {
-      console.log("course id ",courseData._id)
-      const res = await customaxios.get(`/api/course/students/${courseData._id}`);
-      
+      const res = await customaxios.get(`/api/course/students/${id}`);
       if (res.status === 200) {
-        console.log("Number of students:", res.data.numOfStudents);
         setCourseData(prev => ({
           ...prev,
-          numOfStudents: res.data.numOfStudents, 
+          numOfStudents: res.data.numOfStudents,
         }));
-        console.log("After setting course ", courseData)
       } else {
         console.log("Unexpected response status:", res.status);
       }
@@ -36,7 +31,11 @@ function CourseDetail({ courseId }) {
     
     if (course) {
       setCourseData(course);
-      fetchNumOfStudents();
+if(course._id){
+  fetchNumOfStudents(course._id);
+}else{
+  console.log("Course ID is undefined");
+}
     }else{
       window.location.href = '/course';
     }

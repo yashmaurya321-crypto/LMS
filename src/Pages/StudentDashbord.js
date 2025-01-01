@@ -7,8 +7,10 @@ import { FaBook, FaCog, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import CourseCard from '../Component/CourseCard';
 import { useNavigate } from 'react-router-dom';
 import customaxios from '../Component/Customaxios';
+import ProfileImageModal from '../Component/ProfileImageModal';
 function StudentDashboard() {
   const [activeTab, setActiveTab] = useState('courses'); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const userInfo = useSelector((state) => state.user.userInfo); 
   console.log("student ", userInfo);
   const navigate = useNavigate();
@@ -54,13 +56,26 @@ if(res.status === 200){
     console.log(err);
   }
 }
+const handleUploadPhoto = () => {
+  setIsModalOpen(true);
+};
+
+const handleUploadSuccess = (imageUrl) => {
+  // Update the user info in Redux or refresh the page
+  window.location.reload();
+};
   return (
     <div className="dashboard-container">
       {/* Left Panel */}
       <div className="left-panel">
         <div className="profile-card">
-          <img src={img2} alt="Profile" className="profile-image" />
-          {/* Check if userInfo is loaded and has a name */}
+        <img 
+            src={userInfo?.profileImage || img2} 
+            alt="Profile" 
+            className="profile-image cursor-pointer hover:opacity-80 transition-opacity duration-300" 
+            onClick={handleUploadPhoto}
+            title="Click to change profile picture"
+          />
           <h3>{userInfo?.name || 'Loading...'}</h3>
           <div className="profile-buttons">
             <button
@@ -120,6 +135,12 @@ if(res.status === 200){
           </div>
         )}
       </div>
+      <ProfileImageModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={handleUploadSuccess}
+        userId={userInfo._id}
+      />
     </div>
   );
 }

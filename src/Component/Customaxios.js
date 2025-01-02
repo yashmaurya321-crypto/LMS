@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const customaxios = axios.create({
-  baseURL: 'http://localhost:5000', // Your backend base URL
-  withCredentials: true, // Ensure credentials (like cookies) are included in requests
+  baseURL: 'https://lms-backend-z2zb.onrender.com',
+  withCredentials: true, 
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -16,16 +16,14 @@ customaxios.interceptors.request.use((request) => {
   return request;
 });
 
-// Response Interceptor
 customaxios.interceptors.response.use(
   (response) => {
-    // Log the response data
+   
     console.log('Response Data:', response.data);
 
-    // Log the response headers to check for cookies or other headers
+    
     console.log('Response Headers:', response.headers);
 
-    // If you want to check for a specific header like 'Set-Cookie'
     const setCookieHeader = response.headers['set-cookie'];
     if (setCookieHeader) {
       console.log('Set-Cookie Header:', setCookieHeader);
@@ -33,7 +31,6 @@ customaxios.interceptors.response.use(
       console.log('No Set-Cookie Header in Response');
     }
 
-    // Return the response so that the original request can continue
     return response;
   },
   (error) => {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const customaxios = axios.create({
-  baseURL: 'http://localhost:5000', // Your backend base URL
+  baseURL: 'https://lms-backend-sokx.onrender.com', // Your backend base URL
   withCredentials: true, // Ensure credentials (like cookies) are included in requests
   headers: {
     'Content-Type': 'application/json',

@@ -55,13 +55,15 @@ const Carousel = () => {
           </div>
         </div>
       ))}
-
-      <button className="nav-button" onClick={prevSlide} style={{ right: 16, top : 190 }}>
-        <FaArrowLeft size={20} />
+<div style = {{display : "flex", flexDirection : "row"}}>
+<button className="nav-button" onClick={prevSlide} style={{ right: 16 }}>
+        <FaArrowLeft size={40} />
       </button>
-      <button className="nav-button" onClick={nextSlide} style={{ right: 16 }}>
-        <FaArrowRight size={20} />
+      <button className="nav-button-2" onClick={nextSlide} style={{ right: 16 }}>
+        <FaArrowRight size={40} />
       </button>
+</div>
+      
     </div>
   );
 };

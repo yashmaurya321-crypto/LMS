@@ -15,7 +15,7 @@ const ProfileImageModal = ({ isOpen, onClose, onSuccess, userId }) => {
     onClose();
   };
 
-  const handleImageSelect = (e) => {
+  const handleImageSelect = async(e) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5000000) {
@@ -37,21 +37,45 @@ const ProfileImageModal = ({ isOpen, onClose, onSuccess, userId }) => {
       setError('Please select an image');
       return;
     }
-
+  
     try {
       setIsUploading(true);
       const formData = new FormData();
-      formData.append('profileImage', selectedImage);
-
-      onClose();
-      console.log('formData', formData);
+      formData.append('profileImage', selectedImage);  // Append image file
+      formData.append('userId', userId);  // Append userId
+  
+      const res = await customaxios.post('/api/user/upload-profile-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',  
+        },
+      });
+  
+      if (res.status === 200) {
+        // Get user data from local storage
+        const user = JSON.parse(localStorage.getItem('user'));  // Parse to get the object
+  
+        if (user) {
+          // Update user data with the new image URL
+          user.image = res.data.user.image;  // Assuming the backend returns the image URL in res.data.user.image
+  
+          // Store the updated user data back into local storage
+          localStorage.setItem('user', JSON.stringify(user));  // Save the updated user object
+  
+          console.log("Updated user from backend:", user);  // Log the updated user data
+        }
+  
+        onClose();  // Close the modal after upload is successful
+        window.location.reload();  // Reload the page to reflect the changes
+      } else {
+        setError(res.data.message);  // Show error if status is not 200
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to upload image');
     } finally {
       setIsUploading(false);
     }
   };
-
+  
   // Clean up preview URL when component unmounts or modal closes
   React.useEffect(() => {
     return () => {

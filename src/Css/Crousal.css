@@ -17,10 +17,10 @@
     top: 50%;
     transform: translateY(-50%);
     color: #fff;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border: 2px solid white;
-    border-radius: 8px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +31,25 @@
   .nav-button:hover {
     background-color: rgba(255, 255, 255, 0.5);
   }
+  .nav-button-2 {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    color: #fff;
+    width: 70px;
+    height: 70px;
+    border: 2px solid white;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+  }
   
+  .nav-button-2:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
   .gradient {
     position: absolute;
     top: 0;

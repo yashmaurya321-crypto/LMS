@@ -272,7 +272,7 @@ return (
               <br />
               <span>Level: {course.level}</span>
               <br />
-              <span>Purchases: {course.purchases}</span>
+            
             </div>
             <button
               className="delete-button"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import img2 from '../assets/hero.png';
+import img2 from '../assets/user.png';
 import img1 from '../assets/download.jpeg';
 import { useSelector } from 'react-redux';
 import '../Css/StudentDashbord.css';
@@ -70,7 +70,7 @@ const handleUploadSuccess = (imageUrl) => {
       <div className="left-panel">
         <div className="profile-card">
         <img 
-            src={userInfo?.profileImage || img2} 
+            src={userInfo?.image || img2} 
             alt="Profile" 
             className="profile-image cursor-pointer hover:opacity-80 transition-opacity duration-300" 
             onClick={handleUploadPhoto}
